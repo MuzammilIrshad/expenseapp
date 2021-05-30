@@ -1,8 +1,4 @@
 
-import React from 'react';
-
-
-
 
 export const Reducer = (state, action) => {
     if (action.type === 'ADD_TRANSACTION') {

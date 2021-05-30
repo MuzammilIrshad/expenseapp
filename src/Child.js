@@ -4,7 +4,7 @@ import './App.css';
 import {TransactionContext} from './Context';
 
 function Child() {
-    let { transactions, addTransaction, delTransaction} = useContext(TransactionContext);
+    let { transactions, addTrans, delTrans} = useContext(TransactionContext);
     //console.log(transactions);
     const [Amount, setAmount] = useState('');
     const [Name, setName] = useState('');
@@ -29,7 +29,7 @@ function Child() {
     const submit = (e) => {
        e.preventDefault();
         if (Amount && Name) {
-                addTransaction({ Amount, Name, id: Math.random() });
+                addTrans({ Amount, Name, id: Math.random() });
             }
           else {
             console.log("Fill the fields");
@@ -37,13 +37,29 @@ function Child() {
         setAmount('');
         setName('');
     }
-    
+
+    function getBalance() {
+        const balance = getIncome() + getExpense();
+        if (balance >= 0) {
+            return (
+                <h2 style={{ color: 'green' }}>{balance}</h2>
+            )
+        }
+        else {
+            return (
+                <h2 style={{ color: 'red' }}>{balance}</h2>
+            )
+        }
+        
+    }
+
     return (
         <div id='expense-app'>
             <h1 className='heading'>Expense Tracker</h1>
             <hr/>
             <div id = 'balance'>
-                <h2>Balance: </h2><h2>{getIncome() + getExpense()}</h2>
+                <h2>Balance: </h2>
+                {getBalance()}
             </div>
             <div id='income-expense'>
                 <h2 id='income'>Income:<br /><br />{getIncome()}</h2>
@@ -62,7 +78,7 @@ function Child() {
                                 <li key={id}>
                                     <span>{name}</span>
                                     <span>{amount}</span>
-                                    <button onClick={() => delTransaction(id)}>remove</button>
+                                    <button onClick={() => delTrans(id)}>remove</button>
                                 </li>
                             );
                         })

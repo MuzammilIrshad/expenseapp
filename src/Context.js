@@ -13,14 +13,14 @@ export const TransactionContext = createContext(DefaultValues);
 
 const TransactionProvider = ({ children }) => {
     const [state, Dispatch] = useReducer(Reducer, DefaultValues);
-    function addTransaction(transObj) {
+    function addTrans(transObj) {
         Dispatch({ type: 'ADD_TRANSACTION', payLoad: { amount: transObj.Amount, name: transObj.Name, id: transObj.id } })
     }
-    function delTransaction(transObj) {
+    function delTrans(transObj) {
         Dispatch({ type: 'REMOVE', payload:transObj })
     }
     return (
-        <TransactionContext.Provider value={{ transactions: state, addTransaction, delTransaction }} >
+        <TransactionContext.Provider value={{ transactions: state, addTrans, delTrans }} >
         { children }
         </TransactionContext.Provider>
     )
