@@ -28,10 +28,17 @@ jobs:
         uses: actions/setup-node@v2-beta
         with:
           node-version: 12
-
-      # Runs a set of commands using the runners shell
-      - name: Installing surge
-        run:  npm install --global surge
+      - name: Github action for npm
+        uses: Borales/actions-npm@v6.14.4
+        with:
+          cmd: install # will run `npm install` command
+        
+      - name: Build React App
+        run: npm run build
+      
+      - name: Install Surge
+        run: npm install -g surge
+      # Runs a set of commands using the runners shel
       - name: deploying using surge
         run:  surge ./ Expense_app_1.surge.sh --token ${{secrets.SURGE_TOKEN}}
         
